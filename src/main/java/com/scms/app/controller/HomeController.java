@@ -31,7 +31,12 @@ public class HomeController {
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId != null) {
             model.addAttribute("userName", session.getAttribute("name"));
-            model.addAttribute("userRole", session.getAttribute("role"));
+            UserRole role = (UserRole) session.getAttribute("role");
+            model.addAttribute("userRole", role);
+            // 기존 세션에 isAdmin이 없으면 추가
+            if (session.getAttribute("isAdmin") == null && role != null) {
+                session.setAttribute("isAdmin", role == UserRole.ADMIN);
+            }
         }
 
         // 메인 페이지용 프로그램 목록 조회 (최신 8개)
