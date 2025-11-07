@@ -11,7 +11,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 /**
  * 인증 관련 REST API Controller
@@ -49,7 +54,15 @@ public class AuthController {
         session.setAttribute("role", response.getRole());
         session.setAttribute("isFirstLogin", response.getIsFirstLogin());
 
-        log.info("로그인 성공: {} ({})", response.getName(), response.getStudentNum());
+        // Spring Security SecurityContext에 인증 정보 설정
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                response.getStudentNum(), // principal
+                null, // credentials (비밀번호는 저장하지 않음)
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + response.getRole().name()))
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        log.info("로그인 성공: {} ({}) - Role: {}", response.getName(), response.getStudentNum(), response.getRole());
 
         return ResponseEntity.ok(response);
     }
@@ -68,7 +81,11 @@ public class AuthController {
             log.info("로그아웃: userId {}", userId);
         }
 
+        // 세션 무효화
         session.invalidate();
+
+        // Spring Security SecurityContext 클리어
+        SecurityContextHolder.clearContext();
 
         return ResponseEntity.ok("로그아웃 완료");
     }
