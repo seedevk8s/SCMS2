@@ -4,7 +4,11 @@
     <div class="header-container">
         <!-- 로고 -->
         <a href="/" class="header-logo">
-            <span class="header-logo-text">🎓 푸름대학교</span>
+            <div class="logo-wrapper">
+                <span class="logo-badge">WellTech</span>
+                <span class="logo-main">푸름대학교</span>
+                <span class="logo-sub">POOREUM UNIVERSITY</span>
+            </div>
         </a>
 
         <!-- 메인 네비게이션 -->
@@ -33,9 +37,10 @@
 
         <!-- 우측 액션 버튼 -->
         <div class="header-actions">
-            <span th:if="${session.name}" class="text-white" th:text="${session.name} + '님'"></span>
-            <a th:if="${session.userId == null}" href="/login" class="btn btn-light btn-sm">로그인</a>
-            <a th:if="${session.userId != null}" href="/logout" class="btn btn-light btn-sm">로그아웃</a>
+            <a href="#" class="header-link">외부취업가점</a>
+            <span class="header-divider">|</span>
+            <a th:if="${session.userId == null}" href="/login" class="header-link">로그인</a>
+            <a th:if="${session.userId != null}" href="/logout" class="header-link">로그아웃</a>
             <button class="btn-search" aria-label="검색">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>

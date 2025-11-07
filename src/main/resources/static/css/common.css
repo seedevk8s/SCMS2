@@ -112,9 +112,32 @@ body {
     height: 40px;
 }
 
-.header-logo-text {
-    font-size: 20px;
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-badge {
+    background: #56B976;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 12px;
     font-weight: 600;
+}
+
+.logo-main {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    white-space: nowrap;
+}
+
+.logo-sub {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
     white-space: nowrap;
 }
 
@@ -150,6 +173,23 @@ body {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
+}
+
+.header-link {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+}
+
+.header-link:hover {
+    opacity: 0.8;
+}
+
+.header-divider {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
 }
 
 .btn-search {
