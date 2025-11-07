@@ -34,7 +34,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     // Thymeleaf Layout Dialect
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
 
     // Development Tools
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
